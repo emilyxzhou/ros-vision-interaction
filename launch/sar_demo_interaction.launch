@@ -17,7 +17,6 @@
 
     <node pkg="ros-vision-interaction" type="sar_demo.py" name="cordial_client" output="screen"/>
 
-    <!--
     <include file="$(find aws_uploader)/launch/aws_uploader.launch">
         <arg name="upload_directory_path" default="$(arg upload_directory)"/>
         <arg name="bucket_name" default="$(env AWS_BUCKET_NAME)"/>
@@ -35,6 +34,5 @@
             <arg name="is_launch_audio_capture" value="true"/>
         </include>
     </group>
-    -->
 
 </launch>

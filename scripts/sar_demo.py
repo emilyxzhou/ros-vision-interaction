@@ -84,7 +84,7 @@ class CordialInterface(Interface):
 jokes = {
     "science": [
         "I'm reading a book about anti-gravity. <break time=\"0.75s\"/>It's impossible to put down!",
-        "Don't trust atoms. <break time=\"0.75s\"/>They make up everything!",
+        "*QT/sad*Don't trust atoms. <break time=\"0.75s\"/>They make up everything!",
         "What's an astronaut's favorite part of a computer?<break time=\"0.75s\"/> *QT/happy*The space bar.",
         "Wanna hear a joke about paper?<break time=\"0.75s\"/>*QT/happy* Never mind - it's tearable.",
     ],
@@ -92,14 +92,21 @@ jokes = {
         "Why did the cell phone go see an optometrist?<break time=\"0.75s\"/>*QT/happy* It needed contacts.",
         "*question_1*<prosody rate=\"slow\">What</prosody> do you call <break strength=\"weak\"/>an optometrist on a "
         "boat?*QT/happy* <break time=\"0.75s\"/>A see captain!",
-        "What do you call a deer with <prosody rate=\"slow\">no eyes</prosody>?<break time=\"0.75s\"/>*QT/happy* "
-        "<prosody rate=\"slow\">No idea!</prosody>!",
+        "What do you call a <prosody rate=\"60%\" pitch=\"medium\">deer</prosody><break time=\"0.2s\"/> with <prosody rate=\"slow\">no eyes</prosody>?<break time=\"0.75s\"/>*QT/happy* "
+        "<prosody rate=\"x-slow\">No idea!</prosody>!",
+        "What did the man with the magnifying glass say to the guy in the emergency room? ICU!",
+        "Did you hear about the penny and magnifying glass who got married? Their wedding was magnify-cent.",
+        "You know why women's eyes are so noticeable these days? It's the mask era during the pandemic.",
+        "Did you hear that they make a webpage for people who suffer from chronic eye pain? It's a site for sore eyes.",
+        "I love jokes about the eyes. The cornea the better."
     ],
     "robot": [
         "What is a robot's favorite snack? <break time=\"0.75s\"/><prosody volume=\"loud\" rate=\"slow\">"
         "*QT/yawn**happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
-        "What is it called when a robot eats a sandwich in one chomp?<break time=\"0.75s\"/>*QT/happy* A megabyte.",
-        "Why did the robot marry his fiancee? <break time=\"0.75s\"/>*QT/happy*He couldn't resistor!"
+        "What is it called when a robot eats a sandwich in one chomp?<break time=\"0.75s\"/>*QT/yawn* A megabyte.",
+        "Why did the robot marry his fiancee? <break time=\"0.75s\"/>*QT/happy*He couldn't resistor!",
+        "Why dhd the robot go to the shoe shop? To get rebooted.",
+        "A robot's collection of musical instruments will never be complete. They can never get any organs."
     ]
 
 }
@@ -251,7 +258,7 @@ glad_to_hear = State(
 did_you_use_magnifier = State(
     name=DID_YOU_USE_MAGNIFIER,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
-    content=["*quiet*<emphasis level=\"strong\"><prosody pitch=\"low\">Tell me</prosody></emphasis>*question_2*, "
+    content=["<emphasis level=\"strong\"><prosody pitch=\"low\">Tell me</prosody></emphasis>*question_2*, "
               "did you use your magnifier today?"],
     next_states=[
         HOW_DO_YOU_FEEL_ABOUT_VISION,
@@ -330,7 +337,7 @@ poor_response = State(
 liven_things_up = State(
     name=LIVEN_THINGS_UP,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
-    content="*QT/happy*Let's <prosody volume=\"loud\" rate=\"slow\" pitch=\"high\">liven</prosody> things up for a "
+    content="Let's*QT/emotions/hoora* <prosody volume=\"loud\" rate=\"slow\" pitch=\"high\">liven</prosody> things up for a "
              "moment with a joke!",
     next_states=[JOKE_2],
     transitions={"Next": JOKE_2}
@@ -444,7 +451,7 @@ no_news_story_response = State(
 how_many_hours = State(
     name=HOW_MANY_HOURS,
     message_type=Message.Type.TEXT_ENTRY,
-    content="Please enter the number of hours from now as <prosody rate=\"slow\">(1-9)</prosody>.",
+    content="Please enter the number of hours from now<break time=\"0.5s\"/> as <prosody rate=\"slow\">(1-9)</prosody>.",
     next_states=[CANT_WAIT_TO_TALK],
     transitions={" hours": CANT_WAIT_TO_TALK}
 )
