@@ -13,6 +13,7 @@ from interaction_engine.state import State
 from interaction_engine.state_collection import StateCollection
 
 from cordial_msgs.msg import AskOnGuiAction, AskOnGuiGoal
+from std_msgs.msg import Bool
 
 logging.basicConfig(level=logging.INFO)
 
@@ -543,5 +544,17 @@ interaction_engine = InteractionEngine(
     interface=interface
 )
 
+is_record_publisher = rospy.Publisher("data_capture/is_record", Bool, queue_size=1)
+
 if __name__ == "__main__":
+
+    # while is_record_publisher.get_num_connections() == 0:
+    #     rospy.sleep(0.1)
+
+    rospy.sleep(3)
+
+    is_record_publisher.publish(True)
+
     interaction_engine.run()
+
+    is_record_publisher.publish(False)
