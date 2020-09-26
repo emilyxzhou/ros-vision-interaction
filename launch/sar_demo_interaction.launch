@@ -15,12 +15,7 @@
     </include>
 
 
-    <!--
-    <node pkg="cordial_interaction" type="sar_demo.py" name="cordial_client"
-    	respawn="true"
-	output="screen"
-	/>
-	-->
+    <node pkg="ros-vision-interaction" type="sar_demo.py" name="cordial_client" output="screen"/>
 
     <!--
     <include file="$(find aws_uploader)/launch/aws_uploader.launch">
