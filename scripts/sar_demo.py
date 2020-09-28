@@ -97,7 +97,7 @@ jokes = {
         "<prosody rate=\"x-slow\">No idea!</prosody>!",
         "What did the man with the magnifying glass say to the guy in the emergency room? ICU!",
         "Did you hear about the penny and magnifying glass who got married? Their wedding was magnify-cent.",
-        "You know why women's eyes are so noticeable these days? It's the mask era during the pandemic.",
+        "You know why women's eyes are so noticeable these days? It's the mask <break time=\"0.1s\"/>era during the pandemic.",
         "Did you hear that they make a webpage for people who suffer from chronic eye pain? It's a site for sore eyes.",
         "I love jokes about the eyes. The cornea the better."
     ],
@@ -106,7 +106,7 @@ jokes = {
         "*QT/yawn**happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
         "What is it called when a robot eats a sandwich in one chomp?<break time=\"0.75s\"/>*QT/yawn* A megabyte.",
         "Why did the robot marry his fiancee? <break time=\"0.75s\"/>*QT/happy*He couldn't resistor!",
-        "Why dhd the robot go to the shoe shop? To get rebooted.",
+        "Why did the robot go to the shoe shop? To get rebooted.",
         "A robot's collection of musical instruments will never be complete. They can never get any organs."
     ]
 
@@ -116,7 +116,7 @@ jokes_prefaces = [
     "I <prosody rate=\"slow\">love</prosody> funny jokes about {category}, like this one.",
     "I happen to know a bunch of funny jokes about {category}; let me share one with you.",
     "Life is so much easier when you have a great sense of humor. Let me share one with you <prosody "
-    "rate\"slow\">about {category}</prosody>.",
+    "rate=\"slow\">about {category}</prosody>.",
 ]
 
 
@@ -164,6 +164,7 @@ NO_NEWS_STORY_RESPONSE = "response to no news story"
 TAKE_A_BREAK = "take a break"
 ASK_TO_SHARE_NEWS_STORY = "ask to share news story"
 NEWS_STORY = "share news story"
+AFTER_NEWS_STORY = "after news story"
 ENDING_JOKE = "ending joke"
 
 ask_to_chat = State(
@@ -369,8 +370,7 @@ show_me = State(
 tap_screen = State(
     name=TAP_SCREEN,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
-    content=["Tap my screen when you're ready to begin <break time=\"0.75s\"/>and then<break time=\"0.75s\"/> tap my "
-              "screen again when you're done using your magnifier."],
+    content=["Tap my screen when you're done using your magnifier."],
     next_states=[TAKE_A_BREAK],
     transitions={"Next": TAKE_A_BREAK},
 )
@@ -461,8 +461,8 @@ news_story = State(
     name=NEWS_STORY,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=random.choice(news_stories),
-    next_states=["exit"],
-    transitions={"Next": "exit"},
+    next_states=[AFTER_NEWS_STORY],
+    transitions={"Next": AFTER_NEWS_STORY},
 )
 
 ending_joke_contents = [
@@ -471,13 +471,23 @@ ending_joke_contents = [
     "time=\"0.5s\"/>? Eyeball. <break time=\"0.5s\"/>Eyeball who? <break time=\"0.5s\"/> "
     "Eyeball my eyes out every time you go! <break strength=\"x-strong\"/>*QT/bye-bye**happy* Goodbye!",
     "Before we say goodbye, I'd like to tell you one of my favorite jokes about robots.<break time=\"1s\"/> I'm so "
-    "good at sleeping, I can do it with my eyes closed!"
+    "good at sleeping, I can do it with my eyes closed!*QT/bye-bye**happy* Goodbye!"
 ]
 
 ending_joke = State(
     name=ENDING_JOKE,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=random.choice(ending_joke_contents),
+    next_states=["exit"],
+    transitions={"Bye!": "exit"},
+)
+
+after_news_story = State(
+    name=AFTER_NEWS_STORY,
+    message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
+    content="I hope you enjoyed that <prosody pitch=\"high\">story!</prosody> Have a <prosody "
+            "pitch=\"high\">great</prosody> rest of your day. And don't forget to use your *QT/bye-bye**happy*<prosody "
+            "pitch=\"high\">magnifier</prosody>! <break time=\"0.2s\"/><prosody pitch=\"high\" rate=\"slow\">Bye-bye!</prosody>",
     next_states=["exit"],
     transitions={"Bye!": "exit"},
 )
@@ -511,7 +521,8 @@ states = [
     ask_to_share_news_story,
     news_story,
     ending_joke,
-    how_many_hours
+    how_many_hours,
+    after_news_story,
 ]
 
 state_collection = StateCollection(
@@ -548,13 +559,10 @@ is_record_publisher = rospy.Publisher("data_capture/is_record", Bool, queue_size
 
 if __name__ == "__main__":
 
-    # while is_record_publisher.get_num_connections() == 0:
-    #     rospy.sleep(0.1)
-
-    rospy.sleep(3)
-
-    is_record_publisher.publish(True)
+    # rospy.sleep(3)
+    #
+    # is_record_publisher.publish(True)
 
     interaction_engine.run()
 
-    is_record_publisher.publish(False)
+    # is_record_publisher.publish(False)
