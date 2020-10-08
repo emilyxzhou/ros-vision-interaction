@@ -559,10 +559,10 @@ is_record_publisher = rospy.Publisher("data_capture/is_record", Bool, queue_size
 
 if __name__ == "__main__":
 
-    # rospy.sleep(3)
-    #
-    # is_record_publisher.publish(True)
+    rospy.sleep(3)
+
+    is_record_publisher.publish(True)
 
     interaction_engine.run()
 
-    # is_record_publisher.publish(False)
+    is_record_publisher.publish(False)
