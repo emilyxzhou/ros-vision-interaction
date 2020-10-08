@@ -135,7 +135,7 @@ news_stories = [
     "His non-profit has since moved three million pounds of produce from farms in eastern Washington to the western "
     "part of the state for distribution to hundreds of food banks and meal programs. Ahearn has a message for anyone "
     "who wants to make their community a better place, \"I have seen minutes of effort move thousands, and thousands "
-    "of pounds (of food). Just figure out what you are passionate about and what you could get involved in.\" "
+    "of pounds of food. Just figure out what you are passionate about and what you could get involved in.\" "
 ]
 
 ASK_TO_CHAT = "ask to chat"
@@ -169,9 +169,9 @@ ENDING_JOKE = "ending joke"
 
 ask_to_chat = State(
     name=ASK_TO_CHAT,
-    content="*QT/hi**happy*<emphasis level=\"strong\"><prosody pitch=\"high\">Hello</prosody></emphasis><break "
-             "strength=\"weak\"/> there! *question_1*Is this a <emphasis level=\"strong\"><prosody "
-             "rate=\"slow\">good</prosody></emphasis> time to chat with me?",
+    content="<emphasis level=\"strong\"><prosody pitch=\"high\">Hello</prosody></emphasis>*QT/hi*<break "
+            "strength=\"weak\"/> there! *question_1*Is this a <emphasis level=\"strong\"><prosody "
+            "rate=\"slow\">good</prosody></emphasis> time to chat with me?",
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     next_states=[WHATS_YOUR_NAME, THATS_OK],
     transitions={
@@ -184,8 +184,8 @@ whats_your_name = State(
     name=WHATS_YOUR_NAME,
     message_type=Message.Type.TEXT_ENTRY,
     content=["<emphasis level=\"strong\"> <prosody pitch=\"high\"> *happy* Hi!</prosody></emphasis> I'm <prosody "
-              "pitch=\"medium\">Q</prosody><break strength=\"weak\"/>T<break strength=\"weak\"/> robot. "
-              "*question_2*What's <emphasis level=\"strong\"><prosody rate=\"slow\">your</prosody></emphasis> name?"],
+             "pitch=\"medium\">Q</prosody><break strength=\"weak\"/>T<break strength=\"weak\"/> robot. "
+             "*question_2*What's <emphasis level=\"strong\"><prosody rate=\"slow\">your</prosody></emphasis> name?"],
     next_states=[HOW_ARE_YOU],
     transitions={"Next": HOW_ARE_YOU},
 )
@@ -209,7 +209,7 @@ im_sorry = State(
     name=IM_SORRY,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["*QT/emotions/sad* I'm <prosody rate=\"slow\" pitch=\"low\">sorry</prosody> to hear that. Perhaps "
-              "<prosody pitch=\"high\">I</prosody> can <prosody rate=\"slow\">help</prosody> a bit."],
+             "<prosody pitch=\"high\">I</prosody> can <prosody rate=\"slow\">help</prosody> a bit."],
     next_states=[JOKE_1],
     transitions={"Next": JOKE_1},
 )
@@ -221,7 +221,7 @@ joke_1 = State(
     name=JOKE_1,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content="The problem with me having a good sense of humor is that often the people I use it with are not in a "
-             "very good mood. I wonder if I can make you chuckle a bit. " + joke_1_content,
+            "very good mood. I wonder if I can make you chuckle a bit. " + joke_1_content,
     next_states=[DID_YOU_USE_MAGNIFIER],
     transitions={"Next": DID_YOU_USE_MAGNIFIER}
 )
@@ -230,7 +230,7 @@ thats_ok = State(
     name=THATS_OK,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["That's OK {what's your name}, I'm not offended, but let's plan to talk another time today or tomorrow. "
-              "When is good for you?"],
+             "When is good for you?"],
     next_states=[CANT_WAIT_TO_TALK, HOW_MANY_HOURS],
     transitions={
         "Later today": HOW_MANY_HOURS,
@@ -243,7 +243,7 @@ cant_wait_to_talk = State(
     name=CANT_WAIT_TO_TALK,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["*happy**QT/happy*<emphasis level=\"strong\">Great</emphasis>, I can't <prosody pitch=\"high\">wait"
-              "</prosody> to talk to you again <prosody pitch=\"high\" rate=\"slow\">then</prosody>."],
+             "</prosody> to talk to you again <prosody pitch=\"high\" rate=\"slow\">then</prosody>."],
     next_states=[ENDING_JOKE],
     transitions={"Next": ENDING_JOKE},
 )
@@ -252,7 +252,7 @@ glad_to_hear = State(
     name=GLAD_TO_HEAR,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["*happy* <emphasis level=\"strong\"> <prosody pitch=\"high\">Great</prosody></emphasis>, "
-              "I'm <emphasis level=\"strong\">so glad</emphasis> to hear that things are ok with you."],
+             "I'm <emphasis level=\"strong\">so glad</emphasis> to hear that things are ok with you."],
     next_states=[DID_YOU_USE_MAGNIFIER],
     transitions={"Next": DID_YOU_USE_MAGNIFIER},
 )
@@ -261,7 +261,7 @@ did_you_use_magnifier = State(
     name=DID_YOU_USE_MAGNIFIER,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["<emphasis level=\"strong\"><prosody pitch=\"low\">Tell me</prosody></emphasis>*question_2*, "
-              "did you use your magnifier today?"],
+             "did you use your magnifier today?"],
     next_states=[
         HOW_DO_YOU_FEEL_ABOUT_VISION,
         HOW_WAS_MAGNIFIER_EXPERIENCE
@@ -295,7 +295,7 @@ excellent_response = State(
     name=EXCELLENT_RESPONSE,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=[
-        "*happy**QT/happy*<prosody pitch=\"high\" volume=\"loud\" rate=\"slow\">Fantastic</prosody>*happy*! I'm so "
+        "<prosody pitch=\"high\" volume=\"loud\" rate=\"slow\">Fantastic*QT/happy*</prosody>*happy*! I'm so "
         "proud of you for doing <prosody pitch=\"high\" rate=\"slow\">so</prosody> well. Keep up the excellent work "
         "with your magnifier!"],
     next_states=[LIVEN_THINGS_UP],
@@ -340,7 +340,7 @@ liven_things_up = State(
     name=LIVEN_THINGS_UP,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content="Let's*QT/emotions/hoora* <prosody volume=\"loud\" rate=\"slow\" pitch=\"high\">liven</prosody> things up for a "
-             "moment with a joke!",
+            "moment with a joke!",
     next_states=[JOKE_2],
     transitions={"Next": JOKE_2}
 )
@@ -379,8 +379,8 @@ how_do_you_feel_about_vision = State(
     name=HOW_DO_YOU_FEEL_ABOUT_VISION,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["<prosody pitch=\"high\" rate=\"slow\">Oh</prosody>, I hope you'll find an opportunity to use it later "
-              "today or tomorrow for sure. <break time=\"0.75s\"/>*question_1*<prosody rate=\"slow\">How</prosody> do "
-              "you feel about your vision <prosody pitch=\"high\">today</prosody>?"],
+             "today or tomorrow for sure. <break time=\"0.75s\"/>*question_1*<prosody rate=\"slow\">How</prosody> do "
+             "you feel about your vision <prosody pitch=\"high\">today</prosody>?"],
     next_states=[
         TAKE_A_BREAK,
         NO_CONCERNS_RESPONSE
@@ -403,8 +403,8 @@ ask_to_share_news_story = State(
     name=ASK_TO_SHARE_NEWS_STORY,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["<emphasis level=\"strong\"><prosody pitch=\"high\">Next</prosody></emphasis>, I would like to "
-              "share a <emphasis level=\"strong\">story</emphasis> with you. How does <prosody pitch=\"high\" "
-              "rate=\"slow\">that sound</prosody>?"],
+             "share a <emphasis level=\"strong\">story</emphasis> with you. How does <prosody pitch=\"high\" "
+             "rate=\"slow\">that sound</prosody>?"],
     next_states=[
         NO_NEWS_STORY_RESPONSE,
         NEWS_STORY
@@ -419,10 +419,10 @@ take_a_break = State(
     name=TAKE_A_BREAK,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["*QT/challenge*{what's your name}, I know it's <emphasis level=\"strong\"><prosody rate=\"medium\">more "
-              "difficult</prosody></emphasis> to do things with your vision, but I know that together we <emphasis "
-              "level=\"strong\"><prosody rate=\"slow\" pitch=\"high\">can</prosody></emphasis> get through it. "
-              "<prosody pitch=\"high\"><prosody rate=\"slow\">For now</prosody></prosody>, let's take our minds "
-              "<prosody rate=\"slow\">off</prosody> that; we deserve a <prosody pitch=\"high\">break</prosody>."],
+             "difficult</prosody></emphasis> to do things with your vision, but I know that together we <emphasis "
+             "level=\"strong\"><prosody rate=\"slow\" pitch=\"high\">can</prosody></emphasis> get through it. "
+             "<prosody pitch=\"high\"><prosody rate=\"slow\">For now</prosody></prosody>, let's take our minds "
+             "<prosody rate=\"slow\">off</prosody> that; we deserve a <prosody pitch=\"high\">break</prosody>."],
     next_states=[ASK_TO_SHARE_NEWS_STORY],
     transitions={"Next": ASK_TO_SHARE_NEWS_STORY},
     database_keys_to_read=[WHATS_YOUR_NAME]
@@ -440,8 +440,8 @@ no_news_story_response = State(
     name=NO_NEWS_STORY_RESPONSE,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["<prosody pitch=\"low\" rate=\"slow\">No problem</prosody>, I understand. Let's plan to talk another "
-              "time. <prosody rate=\"slow\">When</prosody><break time=\"0.1s\"/> is<break time=\"0.1s\"/> good for "
-              "<prosody pitch=\"high\" rate=\"slow\">you</prosody>?"],
+             "time. <prosody rate=\"slow\">When</prosody><break time=\"0.1s\"/> is<break time=\"0.1s\"/> good for "
+             "<prosody pitch=\"high\" rate=\"slow\">you</prosody>?"],
     next_states=[CANT_WAIT_TO_TALK, HOW_MANY_HOURS],
     transitions={
         "Later today": HOW_MANY_HOURS,
@@ -558,7 +558,7 @@ interaction_engine = InteractionEngine(
 is_record_publisher = rospy.Publisher("data_capture/is_record", Bool, queue_size=1)
 
 if __name__ == "__main__":
-
+    database_manager.clear_entire_database()
     rospy.sleep(3)
 
     is_record_publisher.publish(True)
