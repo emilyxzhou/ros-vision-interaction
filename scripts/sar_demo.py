@@ -101,7 +101,7 @@ jokes = {
         "Did you hear that they make a webpage for people who suffer from chronic eye pain? It's a site for sore eyes.",
         "I love jokes about the eyes. The cornea the better."
     ],
-    "robot": [
+    "robots": [
         "What is a robot's favorite snack? <break time=\"0.75s\"/><prosody volume=\"loud\" rate=\"slow\">"
         "*QT/yawn**happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
         "What is it called when a robot eats a sandwich in one chomp?<break time=\"0.75s\"/>*QT/yawn* A megabyte.",
@@ -115,7 +115,7 @@ jokes = {
 jokes_prefaces = [
     "I <prosody rate=\"slow\">love</prosody> funny jokes about {category}, like this one.",
     "I happen to know a bunch of funny jokes about {category}; let me share one with you.",
-    "Life is so much easier when you have a great sense of humor. Let me share one with you <prosody "
+    "Life is so much easier when you have a great sense of humor. Let me share a joke with you <prosody "
     "rate=\"slow\">about {category}</prosody>.",
 ]
 
@@ -214,8 +214,8 @@ im_sorry = State(
     transitions={"Next": JOKE_1},
 )
 
-joke_1_content = random.choice(jokes["robot"])
-jokes["robot"].remove(joke_1_content)
+joke_1_content = random.choice(jokes["robots"])
+jokes["robots"].remove(joke_1_content)
 
 joke_1 = State(
     name=JOKE_1,
