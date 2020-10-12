@@ -12,7 +12,7 @@ from interaction_engine.message import Message
 from interaction_engine.state import State
 from interaction_engine.state_collection import StateCollection
 
-from cordial_msgs.msg import AskOnGuiAction, AskOnGuiGoal
+from cordial_msgs.msg import AskOnGuiAction, AskOnGuiGoal, MouseEvent
 from std_msgs.msg import Bool
 
 logging.basicConfig(level=logging.INFO)
@@ -29,6 +29,14 @@ class CordialInterface(Interface):
 
         self._action_name = action_name
         self._cordial_action_client = actionlib.SimpleActionClient(self._action_name, AskOnGuiAction)
+        self._is_begin_interaction = False
+
+        self._screen_tap_listener = rospy.Subscriber(
+            "cordial/gui/event/mouse",
+            MouseEvent,
+            callback=self._screen_tap_listener_callback,
+            queue_size=1
+        )
 
         if seconds_until_timeout is not None:
             if type(seconds_until_timeout) is not int or not float:
@@ -80,6 +88,17 @@ class CordialInterface(Interface):
     def _cancel_goal(self):
         if self._cordial_action_client.get_state() == actionlib.SimpleGoalState.ACTIVE:
             self._cordial_action_client.cancel_goal()
+
+    def _screen_tap_listener_callback(self, _):
+        self._is_begin_interaction = True
+
+    @property
+    def is_begin_interaction(self):
+        return self._is_begin_interaction
+
+    @is_begin_interaction.setter
+    def is_begin_interaction(self, is_begin_interaction):
+        self._is_begin_interaction = is_begin_interaction
 
 
 jokes = {
@@ -549,20 +568,30 @@ interface = CordialInterface(
     seconds_until_timeout=None
 )
 
-interaction_engine = InteractionEngine(
-    state_collection=state_collection,
-    database_manager=database_manager,
-    interface=interface
-)
 
 is_record_publisher = rospy.Publisher("data_capture/is_record", Bool, queue_size=1)
 
+
 if __name__ == "__main__":
-    database_manager.clear_entire_database()
-    rospy.sleep(3)
 
-    is_record_publisher.publish(True)
+    while not rospy.is_shutdown():
 
-    interaction_engine.run()
+        while not interface.is_begin_interaction:
+            rospy.sleep(1)
 
-    is_record_publisher.publish(False)
+        rospy.sleep(2)
+
+        is_record_publisher.publish(True)
+
+        interaction_engine = InteractionEngine(
+            state_collection=state_collection,
+            database_manager=database_manager,
+            interface=interface
+        )
+
+        database_manager.clear_entire_database()
+        interaction_engine.run()
+
+        is_record_publisher.publish(False)
+
+        interface.is_begin_interaction = False
