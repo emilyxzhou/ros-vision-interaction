@@ -459,7 +459,7 @@ no_news_story_response = State(
     name=NO_NEWS_STORY_RESPONSE,
     message_type=Message.Type.MULTIPLE_CHOICE_ONE_COLUMN,
     content=["<prosody pitch=\"low\" rate=\"slow\">No problem</prosody>, I understand. Let's plan to talk another "
-             "time. <prosody rate=\"slow\">When</prosody><break time=\"0.1s\"/> is<break time=\"0.1s\"/> good for "
+             "time. <prosody rate=\"slow\">When</prosody> is good for "
              "<prosody pitch=\"high\" rate=\"slow\">you</prosody>?"],
     next_states=[CANT_WAIT_TO_TALK, HOW_MANY_HOURS],
     transitions={
