@@ -121,8 +121,8 @@ jokes = {
         "I love jokes about the eyes. The cornea the better."
     ],
     "robots": [
-        "What is a robot's favorite snack? <break time=\"0.75s\"/><prosody volume=\"loud\" rate=\"slow\">"
-        "*QT/yawn**happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
+        "What is a robot's favorite snack? <break time=\"0.75s\"/>*QT/yawn*<prosody volume=\"loud\" rate=\"slow\">"
+        "*happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
         "What is it called when a robot eats a sandwich in one chomp?<break time=\"0.75s\"/>*QT/yawn* A megabyte.",
         "Why did the robot marry his fiancee? <break time=\"0.75s\"/>*QT/happy*He couldn't resistor!",
         "Why did the robot go to the shoe shop? To get rebooted.",
@@ -199,12 +199,20 @@ ask_to_chat = State(
     }
 )
 
+# whats_your_name = State(
+#     name=WHATS_YOUR_NAME,
+#     message_type=Message.Type.TEXT_ENTRY,
+#     content=["<emphasis level=\"strong\"> <prosody pitch=\"high\"> *happy* Hi!</prosody></emphasis> I'm <prosody "
+#              "pitch=\"medium\">Q</prosody><break strength=\"weak\"/>T<break strength=\"weak\"/> robot. "
+#              "*question_2*What's <emphasis level=\"strong\"><prosody rate=\"slow\">your</prosody></emphasis> name?"],
+#     next_states=[HOW_ARE_YOU],
+#     transitions={"Next": HOW_ARE_YOU},
+# )
 whats_your_name = State(
     name=WHATS_YOUR_NAME,
     message_type=Message.Type.TEXT_ENTRY,
-    content=["<emphasis level=\"strong\"> <prosody pitch=\"high\"> *happy* Hi!</prosody></emphasis> I'm <prosody "
-             "pitch=\"medium\">Q</prosody><break strength=\"weak\"/>T<break strength=\"weak\"/> robot. "
-             "*question_2*What's <emphasis level=\"strong\"><prosody rate=\"slow\">your</prosody></emphasis> name?"],
+    content="What is a robot's favorite snack? *QT/yawn*<break time=\"0.75s\"/><prosody volume=\"loud\" rate=\"slow\">"
+        "*happy*Computer</prosody> <prosody rate=\"slow\" pitch=\"high\">chips</prosody>. Chomp, chomp!",
     next_states=[HOW_ARE_YOU],
     transitions={"Next": HOW_ARE_YOU},
 )
