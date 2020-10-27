@@ -7,7 +7,7 @@ import random
 import rospy
 import schedule
 
-from example_interactions import \
+from scheduled_interaction_states import \
     first_interaction, how_are_you_interaction, check_in_interaction, weekend_interaction, database_keys, Keys
 
 from interaction_engine.database import Database
