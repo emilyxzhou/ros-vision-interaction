@@ -21,7 +21,7 @@ from std_msgs.msg import Bool
 logging.basicConfig(level=logging.INFO)
 
 
-class ExampleInteraction:
+class ScheduledInteraction:
 
     def __init__(self, database_file):
         self._interface = CordialInterface(
