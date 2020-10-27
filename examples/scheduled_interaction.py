@@ -62,7 +62,7 @@ if __name__ == "__main__":
         "scheduled_interaction_database.json"
     )
 
-    example_interaction = ExampleInteraction(database_file)
+    example_interaction = ScheduledInteraction(database_file)
     example_interaction.clear_database()
 
     while not rospy.is_shutdown():
